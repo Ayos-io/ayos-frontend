@@ -1,0 +1,20 @@
+{
+  "name": "ayosui",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "Ayos",
+  "license": "MIT",
+  "devDependencies": {
+    "daisyui": "^3.9.2",
+    "ionicons": "^7.2.1",
+    "parcel": "^2.10.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
+  }
+}

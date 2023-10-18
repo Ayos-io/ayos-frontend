@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.right-image {
+    display: block;
+    margin-right: 0px;
+    margin-left: auto;
+}
+  
+.unknown-device {
+    opacity: 0.45;
+}
+
+.enable-cursor {
+    cursor: pointer;
+}

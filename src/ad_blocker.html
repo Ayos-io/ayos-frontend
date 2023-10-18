@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="dark:bg-black">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Ayos | Malware & Tracker Blocker</title>
+  </head>
+  <body>
+    <div
+      id="caption"
+      class="flex text-xl p-4 font-semibold bg-gray-100 dark:bg-black border-b dark:border-gray-600 shadow-sm"
+    >
+      <div class="pr-8">
+        <button
+          id="btn-back"
+          class="text-blue-500 dark:dark:text-sky-300 text-base font-medium"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.0"
+            stroke="currentColor"
+            class="p-0 pb-1 w-6 inline"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+          Privacy
+        </button>
+      </div>
+      <div>Malware & Tracker Blocker</div>
+      <div></div>
+    </div>
+
+    <button
+      id="btn-logs"
+      class="flex w-full inline p-3 border-b dark:border-zinc-700 dark:text-sky-300 dark:bg-zinc-800 text-blue-500"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2.625 6.75a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875 0A.75.75 0 018.25 6h12a.75.75 0 010 1.5h-12a.75.75 0 01-.75-.75zM2.625 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zM7.5 12a.75.75 0 01.75-.75h12a.75.75 0 010 1.5h-12A.75.75 0 017.5 12zm-4.875 5.25a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875 0a.75.75 0 01.75-.75h12a.75.75 0 010 1.5h-12a.75.75 0 01-.75-.75z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <div class="pl-3">Blocker Logs</div>
+    </button>
+
+    <table
+      class="border-collapse w-full bg-white dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 text-sm shadow-sm"
+    >
+      <tbody>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div class="text-base">Last update of block lists</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="last-update" class="text-base"></div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div id="tracking" class="text-base">Tracking</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="tracking-manage" class="text-base"></div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div id="malware" class="text-base">Malware</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="malware-manage" class="text-base"></div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div id="ads" class="text-base">Ads</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="ads-manage" class="text-base"></div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div id="phishing" class="text-base">Phishing</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="phishing-manage" class="text-base"></div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 p-3 text-slate-800 dark:text-slate-200"
+          >
+            <div id="ransomware" class="text-base">Ransomware</div>
+          </td>
+          <td
+            class="border-b border-slate-300 dark:border-slate-700 text-gray-500 text-right p-3"
+          >
+            <div id="ransomware-manage" class="text-base"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <dialog id="modal-add" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box h-full dark:bg-black">
+        <div id="add-rule" class="flex columns-3 p-0">
+          <div class="w-full">
+            <form method="dialog">
+              <button
+                id="btn-cancel"
+                class="text-blue-500 text-base font-light dark:text-sky-300"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+          <div class="w-full whitespace-nowrap">
+            <h3
+              id="modal-name-header"
+              class="font-semibold text-base dark:text-zinc-200"
+            >
+              Add Rule
+            </h3>
+          </div>
+          <div class="w-full text-right">
+            <button
+              id="btn-add-save"
+              class="text-blue-500 text-base font-medium dark:text-sky-300"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+
+        <div class="p-4"></div>
+
+        <form id="form-configuration">
+          <div class="form-control">
+            <div class="flex pt-4 text-center">
+              <div class="flex-none grow pr-4">
+                <select
+                  id="type-select"
+                  name="type"
+                  class="select select-bordered w-full max-w-xs"
+                >
+                  <option value="" selected>Select Type</option>
+                  <option value="port-forward">Port Forward</option>
+                  <option value="block">Block Connection</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="new-rule" class="hidden">
+              <div class="flex columns-2 border-b pt-10">
+                <div class="flex-none pr-4">Description</div>
+                <div class="grow">
+                  <input
+                    class="w-full placeholder:text-sm"
+                    placeholder="Optional"
+                    type="text"
+                    name="description"
+                  />
+                </div>
+              </div>
+              <div class="flex columns-2 border-b pt-10">
+                <div class="flex-none pr-4">Source IP</div>
+                <div class="grow">
+                  <input
+                    class="w-full placeholder:text-sm"
+                    placeholder="Required"
+                    type="text"
+                    name="source"
+                  />
+                </div>
+              </div>
+              <div class="flex columns-2 border-b pt-10">
+                <div class="flex-none pr-4">Destination IP</div>
+                <div class="grow">
+                  <input
+                    class="w-full placeholder:text-sm"
+                    placeholder="Required"
+                    type="text"
+                    name="destination"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div id="add-portforward" class="hidden">
+              <div class="flex columns-2 pt-10">
+                <div class="grow">
+                  <select
+                    name="protocol"
+                    class="select select-bordered w-full max-w-xs"
+                  >
+                    <option value="tcp" selected>TCP</option>
+                    <option value="udp">UDP</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex columns-2 border-b pt-10">
+                <div class="flex-none pr-4">Port</div>
+                <div class="grow">
+                  <input
+                    class="w-full placeholder:text-sm"
+                    placeholder="Required"
+                    type="text"
+                    name="port"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog id="modal-logs" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box h-full dark:bg-black">
+        <div id="fw-logs" class="flex columns-3 gap-8 p-0">
+          <form method="dialog">
+            <div>
+              <button
+                id="btn-cancel"
+                class="text-blue-500 text-base font-medium dark:text-sky-300"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+          <div class="whitespace-nowrap">
+            <h3
+              id="modal-name-header"
+              class="font-semibold text-base dark:text-zinc-200"
+            >
+              Blocker Logs
+            </h3>
+          </div>
+          <div></div>
+        </div>
+
+        <div class="p-4"></div>
+
+        <form id="form-logs">
+          <div class="form-control"></div>
+        </form>
+      </div>
+      <div class="spinner"></div>
+    </dialog>
+
+    <dialog id="modal-edit" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box h-full dark:bg-black">
+        <div class="flex columns-3 gap-8 p-0">
+          <form method="dialog">
+            <div>
+              <button
+                id="btn-cancel"
+                class="text-blue-500 text-base font-medium dark:text-sky-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+          <div class="whitespace-nowrap">
+            <h3
+              id="modal-name-header"
+              class="font-semibold text-base dark:text-zinc-200"
+            >
+              Edit Configuration
+            </h3>
+          </div>
+          <div></div>
+        </div>
+
+        <form id="form-edit-configuration">
+          <div class="form-control">
+            <div class="p-4"></div>
+            <div
+              class="card w-full bg-base-100 p-2 border bg-gray-50 border-gray-200 dark:border-zinc-700 dark:bg-zinc-800"
+            >
+              <h2
+                id="edit-rule"
+                class="text-base text-center font-medium dark:text-zinc-200"
+              ></h2>
+            </div>
+
+            <div class="p-12"></div>
+            <button
+              id="del-vpn"
+              class="w-full self-center border rounded border-red-500 bg-red-50 p-2"
+            >
+              <div class="pr-4 text-center text-red-600 font-semibold">
+                Delete Rule
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <!-- put some padding for the tabbed navigation -->
+    <div class="p-12"></div>
+
+    <ul
+      class="flex bg-gray-100 dark:bg-black shadow-md fixed inset-x-0 bottom-0"
+    >
+      <li class="flex-1 mr-2">
+        <a
+          class="text-center block hover:border-gray-200 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900 py-2 px-4 text-xs"
+          href="/"
+        >
+          <img
+            src="./images/logo_inactive.png"
+            class="center-image"
+            width="32"
+            height="32"
+          />
+          Home
+        </a>
+      </li>
+      <li class="flex-1 mr-2">
+        <a
+          class="text-center block hover:border-gray-200 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900 py-2 px-4 text-xs"
+          href="vpn.html"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-8 h-8 center-image"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          VPN
+        </a>
+      </li>
+      <li class="flex-1 mr-2">
+        <a
+          class="text-center block py-2 px-4 text-orange-700 dark:text-orange-300 text-xs"
+          href="privacy.html"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-8 h-8 center-image text-blue-950 dark:text-sky-300"
+          >
+            <path
+              d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"
+            />
+            <path
+              d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"
+            />
+            <path
+              d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z"
+            />
+          </svg>
+          Privacy</a
+        >
+      </li>
+      <li class="flex-1 mr-2">
+        <a
+          class="text-center block hover:border-gray-200 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900 py-2 px-4 text-xs"
+          href="firewall.html"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="w-8 h-8 center-image"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"
+              clip-rule="evenodd"
+            />
+          </svg>
+
+          Firewall
+        </a>
+      </li>
+      <li class="flex-1 mr-2">
+        <a
+          class="text-center block hover:border-gray-200 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900 py-2 px-4 text-xs"
+          href="system.html"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-8 h-8 center-image"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
+            />
+          </svg>
+          System</a
+        >
+      </li>
+    </ul>
+    <script src="js/ad_blocker.js"></script>
+  </body>
+</html>

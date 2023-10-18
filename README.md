@@ -4,7 +4,7 @@ This is the frontend for Ayos Home.
 
 ## Screenshot
 
-![Screenshot as of c03b788.png](Meta/Screenshots/screenshot-c03b788.png)
+![Screenshot as of c03b788.png](meta/ayos-screenshot-dark.png)
 
 ## Get in touch and participate!
 
